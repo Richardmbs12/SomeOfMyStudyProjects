@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>io.bcteam.assembly</groupId>
+        <artifactId>svm</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>io.bcteam.assembly.svm</groupId>
+    <artifactId>svm-jee-assembly</artifactId>
+    <packaging>pom</packaging>
+
+    <name>Assembly - SVM - JEE</name>
+
+    <modules>
+        <module>svm-jee-ejb</module>
+        <module>svm-jee-web</module>
+        <module>svm-jee-ear</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.bcteam.assembly.svm.svm-jee-assembly</groupId>
+                <artifactId>ejb</artifactId>
+                <version>${project.version}</version>
+                <type>ejb</type>
+            </dependency>
+            <dependency>
+                <groupId>io.bcteam.assembly.svm.svm-jee-assembly</groupId>
+                <artifactId>web</artifactId>
+                <version>${project.version}</version>
+                <type>war</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>
