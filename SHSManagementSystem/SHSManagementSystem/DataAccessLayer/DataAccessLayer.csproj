@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{11F2D98C-6CA2-4E48-AB12-C6982CB930F4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DataAccessLayer</RootNamespace>
+    <AssemblyName>DataAccessLayer</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Persistance\DataConnection\IDataConnection.cs" />
+    <Compile Include="Persistance\DataHandler\IDataHandler.cs" />
+    <Compile Include="Persistance\EntityConfigurations\CustomerConfiguration.cs" />
+    <Compile Include="Persistance\EntityConfigurations\UserConfiguration.cs" />
+    <Compile Include="Persistance\PersistanceHelper.cs" />
+    <Compile Include="Persistance\PersistanceManagers\CustomerPersistanceManager\ICustomerPersistanceManager.cs" />
+    <Compile Include="Persistance\PersistanceManagers\CustomerPersistanceManager\CustomerPersistanceManager.cs" />
+    <Compile Include="Persistance\PersistanceManagers\ProductPersistanceManager\IProductPersistanceManager.cs" />
+    <Compile Include="Persistance\PersistanceManagers\ProductPersistanceManager\ProductPersistanceManager.cs" />
+    <Compile Include="Persistance\Repositories\BillingInvoiceRepository\BillingInvoiceRepository.cs" />
+    <Compile Include="Persistance\Repositories\BillingInvoiceRepository\IBillingInvoiceRepository.cs" />
+    <Compile Include="Persistance\Repositories\ContractTypeRepository\ContractTypeRepository.cs" />
+    <Compile Include="Persistance\Repositories\ContractTypeRepository\IContractTypeRepository.cs" />
+    <Compile Include="Persistance\Repositories\CustomerEnquiryRepository\CustomerEnquiryRepository.cs" />
+    <Compile Include="Persistance\Repositories\CustomerEnquiryRepository\ICustomerEnquiryRepository.cs" />
+    <Compile Include="Persistance\Repositories\CustomerManagementEmployeeRepository\CustomerManagementEmployeeRepository.cs" />
+    <Compile Include="Persistance\Repositories\CustomerManagementEmployeeRepository\ICustomerManagementEmployeeRepository.cs" />
+    <Compile Include="Persistance\Repositories\CustomerRepository\CustomerRepository.cs" />
+    <Compile Include="Persistance\Repositories\CustomerRepository\ICustomerRepository.cs" />
+    <Compile Include="Persistance\Repositories\EmployeeRepository\EmployeeRepository.cs" />
+    <Compile Include="Persistance\Repositories\EmployeeRepository\IEmployeeRepository.cs" />
+    <Compile Include="Persistance\Repositories\OrderRepository\IOrderRepository.cs" />
+    <Compile Include="Persistance\Repositories\OrderRepository\OrderRepository.cs" />
+    <Compile Include="Persistance\Repositories\CustomerProductConfigurationRepository\ICustomerProductConfigurationRepository.cs" />
+    <Compile Include="Persistance\Repositories\CustomerProductConfigurationRepository\CustomerProductConfigurationRepository.cs" />
+    <Compile Include="Persistance\Repositories\ProductManagementEmployeeRepository\ProductManagementEmployeeRepository.cs" />
+    <Compile Include="Persistance\Repositories\ProductManagementEmployeeRepository\IProductManagementEmployeeRepository.cs" />
+    <Compile Include="Persistance\Repositories\ProductRepository\IProductRepository.cs" />
+    <Compile Include="Persistance\Repositories\ProductRepository\ProductRepository.cs" />
+    <Compile Include="Persistance\Repositories\ProductTypeRepository\IProductTypeRepository.cs" />
+    <Compile Include="Persistance\Repositories\ProductTypeRepository\ProductTypeRepository.cs" />
+    <Compile Include="Persistance\Repositories\IRepository.cs" />
+    <Compile Include="Persistance\Repositories\Repository.cs" />
+    <Compile Include="Persistance\DataConnection\SQLServerDataConnection.cs" />
+    <Compile Include="Persistance\DataHandler\DataHandler.cs" />
+    <Compile Include="Persistance\Repositories\ScheduleRepository\IScheduleRepository.cs" />
+    <Compile Include="Persistance\Repositories\ScheduleRepository\ScheduleRepository.cs" />
+    <Compile Include="Persistance\Repositories\TechnicalSupportEnquiryRepository\ITechnicalSupportEnquiryRepository.cs" />
+    <Compile Include="Persistance\Repositories\TechnicalSupportEnquiryRepository\TechnicalSupportEnquiryRepository.cs" />
+    <Compile Include="Persistance\Repositories\TechnicalSupportManagementEmployeeRepository\TechnicalSupportManagementEmployeeRepository.cs" />
+    <Compile Include="Persistance\Repositories\TechnicalSupportManagementEmployeeRepository\ITechnicalSupportManagementEmployeeRepository.cs" />
+    <Compile Include="Persistance\Repositories\TechnicalTaskRepository\ITechnicalTaskRepository.cs" />
+    <Compile Include="Persistance\Repositories\TechnicalTaskRepository\TechnicalTaskRepository.cs" />
+    <Compile Include="Persistance\Repositories\UserRepository\IUserRepository.cs" />
+    <Compile Include="Persistance\Repositories\UserRepository\UserRepository.cs" />
+    <Compile Include="Persistance\UnitOfWork\IUnitOfWork.cs" />
+    <Compile Include="Persistance\UnitOfWork\UnitOfWork.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Persistance\SHSDatabaseContext.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessLayer\BusinessLayer.csproj">
+      <Project>{8ac14675-5158-48c3-a773-26ba6c5448df}</Project>
+      <Name>BusinessLayer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8AC14675-5158-48C3-A773-26BA6C5448DF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BusinessLayer</RootNamespace>
+    <AssemblyName>BusinessLayer</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="io\customerManagement\customer\billing\IBillingInvoiceRecordKeeper.cs" />
+    <Compile Include="io\customerManagement\customer\billing\searchCriteria\BillingInvoiceSearchCriteria.cs" />
+    <Compile Include="io\customerManagement\customer\contract\Contract.cs" />
+    <Compile Include="io\customerManagement\customer\contract\ContractType.cs" />
+    <Compile Include="io\customerManagement\customer\contract\IContractTypeRecordKeeper.cs" />
+    <Compile Include="io\customerManagement\customer\contract\ServiceLevel.cs" />
+    <Compile Include="io\customerManagement\customer\ICustomerRecordKeeper.cs" />
+    <Compile Include="io\customerManagement\enquiries\searchCriteria\CustomerEnquirySearchCriteria.cs" />
+    <Compile Include="io\customerManagement\enquiries\ICustomerEnquiryRecordKeeper.cs" />
+    <Compile Include="io\customerManagement\enquiries\order\IOrderRecordKeeper.cs" />
+    <Compile Include="io\customerManagement\enquiries\order\searchCriteria\OrderSearchCriteria.cs" />
+    <Compile Include="io\customerManagement\enquiries\technicalSupportEnquiry\ITechnicalSupportEnquiryRecordKeeper.cs" />
+    <Compile Include="io\customerManagement\enquiries\technicalSupportEnquiry\searchCriteria\TechnicalSupportEnquirySearchCriteria.cs" />
+    <Compile Include="io\employeeManagement\customerManagementEmployee\ICustomerManagementEmployeeRecordKeeper.cs" />
+    <Compile Include="io\employeeManagement\IEmployeeRecordKeeper.cs" />
+    <Compile Include="io\employeeManagement\productManagementEmployee\IProductManagementEmployeeRecordKeeper.cs" />
+    <Compile Include="io\fileHandler\IFileHandler.cs" />
+    <Compile Include="io\globalExceptions\GlobalExceptions.cs" />
+    <Compile Include="io\productManagement\productType\IProductTypeRecordKeeper.cs" />
+    <Compile Include="io\productManagement\product\IProductRecordKeeper.cs" />
+    <Compile Include="io\employeeManagement\technicalSupportManagementEmployee\ITechnicalSupportManagementEmployeeRecordKeeper.cs" />
+    <Compile Include="io\technicalSupport\schedule\IScheduleRecordKeeper.cs" />
+    <Compile Include="io\technicalSupport\technicalTask\ITechnicalTaskRecordKeeper.cs" />
+    <Compile Include="io\users\address\Address.cs" />
+    <Compile Include="io\employeeManagement\customerManagementEmployee\CustomerManagementEmployee.cs" />
+    <Compile Include="io\customerManagement\customer\billing\BillingInformation.cs" />
+    <Compile Include="io\customerManagement\customer\billing\BillingInvoice.cs" />
+    <Compile Include="io\customerManagement\customer\Customer.cs" />
+    <Compile Include="io\customerManagement\customer\productConfiguration\CustomerProductConfiguration.cs" />
+    <Compile Include="io\customerManagement\customer\productConfiguration\ProductInstallationHistory.cs" />
+    <Compile Include="io\customerManagement\enquiries\CustomerEnquiry.cs" />
+    <Compile Include="io\customerManagement\enquiries\order\Order.cs" />
+    <Compile Include="io\customerManagement\enquiries\technicalSupportEnquiry\TechnicalSupportEnquiry.cs" />
+    <Compile Include="io\employeeManagement\productManagementEmployee\ProductManagementEmployee.cs" />
+    <Compile Include="io\productManagement\product\Product.cs" />
+    <Compile Include="io\productManagement\productType\ProductType.cs" />
+    <Compile Include="io\productManagement\stock\Stock.cs" />
+    <Compile Include="io\searchCriteria\AllSearch.cs" />
+    <Compile Include="io\searchCriteria\SearchCriteria.cs" />
+    <Compile Include="io\technicalSupport\schedule\Schedule.cs" />
+    <Compile Include="io\employeeManagement\technicalSupportManagementEmployee\TechnicalSupportManagementEmployee.cs" />
+    <Compile Include="io\technicalSupport\technicalTask\TechnicalTask.cs" />
+    <Compile Include="io\users\contactInformation\ContactInformation.cs" />
+    <Compile Include="io\employeeManagement\Employee.cs" />
+    <Compile Include="io\users\loginInformation\AuthenticationLevel.cs" />
+    <Compile Include="io\users\loginInformation\LoginInformation.cs" />
+    <Compile Include="io\users\User.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

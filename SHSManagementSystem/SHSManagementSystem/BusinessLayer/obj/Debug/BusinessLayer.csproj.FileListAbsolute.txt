@@ -1,0 +1,7 @@
+C:\Users\Alicia\Desktop\Richard\Software Engineering 321\SEN Project Files\SHSManagementSystem\SHSManagementSystem\BusinessLayer\bin\Debug\BusinessLayer.dll.config
+C:\Users\Alicia\Desktop\Richard\Software Engineering 321\SEN Project Files\SHSManagementSystem\SHSManagementSystem\BusinessLayer\bin\Debug\BusinessLayer.dll
+C:\Users\Alicia\Desktop\Richard\Software Engineering 321\SEN Project Files\SHSManagementSystem\SHSManagementSystem\BusinessLayer\bin\Debug\BusinessLayer.pdb
+C:\Users\Alicia\Desktop\Richard\Software Engineering 321\SEN Project Files\SHSManagementSystem\SHSManagementSystem\BusinessLayer\obj\Debug\BusinessLayer.csproj.CoreCompileInputs.cache
+C:\Users\Alicia\Desktop\Richard\Software Engineering 321\SEN Project Files\SHSManagementSystem\SHSManagementSystem\BusinessLayer\obj\Debug\BusinessLayer.dll
+C:\Users\Alicia\Desktop\Richard\Software Engineering 321\SEN Project Files\SHSManagementSystem\SHSManagementSystem\BusinessLayer\obj\Debug\BusinessLayer.pdb
+C:\Users\Alicia\Desktop\Richard\Software Engineering 321\SEN Project Files\SHSManagementSystem\SHSManagementSystem\BusinessLayer\obj\Debug\BusinessLayer.csprojResolveAssemblyReference.cache

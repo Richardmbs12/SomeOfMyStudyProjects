@@ -1,0 +1,15 @@
+C:\Users\Alicia\Desktop\Richard\Software Engineering 321\SEN Project Files\SHSManagementSystem\SHSManagementSystem\BusinessLogicLayer\bin\Debug\BusinessLogicLayer.dll
+C:\Users\Alicia\Desktop\Richard\Software Engineering 321\SEN Project Files\SHSManagementSystem\SHSManagementSystem\BusinessLogicLayer\bin\Debug\BusinessLogicLayer.pdb
+C:\Users\Alicia\Desktop\Richard\Software Engineering 321\SEN Project Files\SHSManagementSystem\SHSManagementSystem\BusinessLogicLayer\bin\Debug\BusinessLayer.dll
+C:\Users\Alicia\Desktop\Richard\Software Engineering 321\SEN Project Files\SHSManagementSystem\SHSManagementSystem\BusinessLogicLayer\bin\Debug\DataAccessLayer.dll
+C:\Users\Alicia\Desktop\Richard\Software Engineering 321\SEN Project Files\SHSManagementSystem\SHSManagementSystem\BusinessLogicLayer\bin\Debug\EntityFramework.dll
+C:\Users\Alicia\Desktop\Richard\Software Engineering 321\SEN Project Files\SHSManagementSystem\SHSManagementSystem\BusinessLogicLayer\bin\Debug\BusinessLayer.pdb
+C:\Users\Alicia\Desktop\Richard\Software Engineering 321\SEN Project Files\SHSManagementSystem\SHSManagementSystem\BusinessLogicLayer\bin\Debug\BusinessLayer.dll.config
+C:\Users\Alicia\Desktop\Richard\Software Engineering 321\SEN Project Files\SHSManagementSystem\SHSManagementSystem\BusinessLogicLayer\bin\Debug\DataAccessLayer.pdb
+C:\Users\Alicia\Desktop\Richard\Software Engineering 321\SEN Project Files\SHSManagementSystem\SHSManagementSystem\BusinessLogicLayer\bin\Debug\DataAccessLayer.dll.config
+C:\Users\Alicia\Desktop\Richard\Software Engineering 321\SEN Project Files\SHSManagementSystem\SHSManagementSystem\BusinessLogicLayer\bin\Debug\EntityFramework.xml
+C:\Users\Alicia\Desktop\Richard\Software Engineering 321\SEN Project Files\SHSManagementSystem\SHSManagementSystem\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csprojResolveAssemblyReference.cache
+C:\Users\Alicia\Desktop\Richard\Software Engineering 321\SEN Project Files\SHSManagementSystem\SHSManagementSystem\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csproj.CoreCompileInputs.cache
+C:\Users\Alicia\Desktop\Richard\Software Engineering 321\SEN Project Files\SHSManagementSystem\SHSManagementSystem\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csproj.CopyComplete
+C:\Users\Alicia\Desktop\Richard\Software Engineering 321\SEN Project Files\SHSManagementSystem\SHSManagementSystem\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.dll
+C:\Users\Alicia\Desktop\Richard\Software Engineering 321\SEN Project Files\SHSManagementSystem\SHSManagementSystem\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.pdb

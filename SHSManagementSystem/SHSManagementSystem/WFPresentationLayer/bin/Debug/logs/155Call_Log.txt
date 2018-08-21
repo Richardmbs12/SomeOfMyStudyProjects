@@ -1,0 +1,10 @@
+Call Started ...
+Call Ended at : 04 Jun 2018 09:43:22
+Call Ended at : 04 Jun 2018 09:43:27
+Call Ended at : 04 Jun 2018 09:43:32
+Call Ended at : 04 Jun 2018 09:43:37
+Call Ended at : 04 Jun 2018 09:43:42
+Call Ended at : 04 Jun 2018 09:43:47
+Call Time: System.Timers.Timer Call Ended: 04 Jun 2018 09:49:26
+Call Time: 1881 Call Ended: 04 Jun 2018 09:53:44
+Call Time: 2920ms  Call Ended: 04 Jun 2018 09:57:22

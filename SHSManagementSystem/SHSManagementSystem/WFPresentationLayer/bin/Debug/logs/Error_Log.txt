@@ -1,0 +1,35 @@
+Critical errorAn error occurred while updating the entries. See the inner exception for details.
+Critical errorAn error occurred while updating the entries. See the inner exception for details.
+Critical errorAn error occurred while updating the entries. See the inner exception for details.
+Critical errorThe entity found was of type CustomerEnquiry_BE2F75E54029D90077CC6880EEB21ABE676B4F4E8DC7F543F4B41FBFFE683D26 when an entity of type Order was requested.
+Critical errorThe entity found was of type CustomerEnquiry_BE2F75E54029D90077CC6880EEB21ABE676B4F4E8DC7F543F4B41FBFFE683D26 when an entity of type Order was requested.
+Critical errorObject reference not set to an instance of an object.
+Critical errorObject reference not set to an instance of an object.
+Critical errorSequence contains no elements
+Critical errorSequence contains no elements
+Critical errorSequence contains no elements
+Critical errorSequence contains no elements
+Critical errorSequence contains no elements
+Critical Error : An error occurred while updating the entries. See the inner exception for details.
+Critical errorSequence contains no elements
+Critical errorSequence contains no elements
+Critical errorSequence contains no elements
+Critical errorThe model backing the 'SHSDatabaseContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+Critical errorThe model backing the 'SHSDatabaseContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+Critical errorThe model backing the 'SHSDatabaseContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+Critical errorThe model backing the 'SHSDatabaseContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+Critical errorSequence contains no elements
+Critical errorSequence contains no elements
+Critical errorSequence contains no elements
+Critical errorSequence contains no elements
+Critical errorSequence contains no elements
+Critical errorSequence contains no elements
+Critical errorSequence contains no elements
+Critical errorSequence contains no elements
+Critical errorSequence contains no elements
+Critical errorSequence contains no elements
+Critical errorSequence contains no elements
+Critical errorSequence contains no elements
+Critical errorSequence contains no elements
+Critical errorSequence contains no elements
+Critical errorSequence contains no elements

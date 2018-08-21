@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0EC934FA-1621-449F-8DD3-CBD1D254F8FC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BusinessLogicLayer</RootNamespace>
+    <AssemblyName>BusinessLogicLayer</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="io\customerManagement\CustomerEnquiryRecordKeeper.cs" />
+    <Compile Include="io\customerManagement\customer\billing\BillingInvoiceRecordKeeper.cs" />
+    <Compile Include="io\customerManagement\customer\contract\ContractTypeRecordKeeper.cs" />
+    <Compile Include="io\customerManagement\customer\CustomerRecordKeeper.cs" />
+    <Compile Include="io\customerManagement\enquiries\order\OrderRecordKeeper.cs" />
+    <Compile Include="io\customerManagement\enquiries\technicalSupportEnquiry\TechnicalSupportEnquiryRecordKeeper.cs" />
+    <Compile Include="io\employeeManagement\customerManagementEmployee\CustomerManagementEmployeeRecordKeeper.cs" />
+    <Compile Include="io\employeeManagement\EmployeeRecordKeeper.cs" />
+    <Compile Include="io\employeeManagement\productManagementEmployee\ProductManagementEmployeeRecordKeeper.cs" />
+    <Compile Include="io\employeeManagement\technicalSupportManagementEmployee\TechnicalSupportEmployeeRecordKeeper.cs" />
+    <Compile Include="io\fileHandler\FileHandler.cs" />
+    <Compile Include="io\productManagement\productType\ProductTypeRecordKeeper.cs" />
+    <Compile Include="io\productManagement\product\ProductRecordKeeper.cs" />
+    <Compile Include="io\technicalSupport\schedule\ScheduleRecordKeeper.cs" />
+    <Compile Include="io\technicalSupport\technicalTask\TechnicalTaskRecordKeeper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessLayer\BusinessLayer.csproj">
+      <Project>{8ac14675-5158-48c3-a773-26ba6c5448df}</Project>
+      <Name>BusinessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj">
+      <Project>{11f2d98c-6ca2-4e48-ab12-c6982cb930f4}</Project>
+      <Name>DataAccessLayer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

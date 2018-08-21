@@ -1,0 +1,702 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BusinessLayer.io.SHSDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Address">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Longitude" Type="Double" Nullable="false" />
+    <Property Name="Latitude" Type="Double" Nullable="false" />
+    <Property Name="Suburb" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PostalCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AddressLine2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AddressLine1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="User" Relationship="Self.FK_dbo_Addresses_dbo_Users_ID" FromRole="Addresses" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="BillingInformation">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AccountFrozen" Type="Boolean" Nullable="false" />
+    <Property Name="DebitOrder" Type="Boolean" Nullable="false" />
+    <Property Name="Branch" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Bank" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AccountNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="HasDebitOrder" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK_dbo_BillingInformations_dbo_Customer_ID" FromRole="BillingInformations" ToRole="Customer" />
+    <NavigationProperty Name="BillingInvoices" Relationship="Self.FK_dbo_BillingInvoices_dbo_BillingInformations_BillingInformation_ID" FromRole="BillingInformations" ToRole="BillingInvoices" />
+  </EntityType>
+  <EntityType Name="BillingInvoice">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="Int32" Nullable="false" />
+    <Property Name="AmountDue" Type="Double" Nullable="false" />
+    <Property Name="CreditAmount" Type="Double" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="AccountNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="BillingInformation_ID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="BillingInformation" Relationship="Self.FK_dbo_BillingInvoices_dbo_BillingInformations_BillingInformation_ID" FromRole="BillingInvoices" ToRole="BillingInformations" />
+    <NavigationProperty Name="Order" Relationship="Self.FK_dbo_BillingInvoices_dbo_Order_OrderID" FromRole="BillingInvoices" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="ContactDetail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="WorkNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MobileNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="User" Relationship="Self.FK_dbo_ContactDetails_dbo_Users_ID" FromRole="ContactDetails" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="BillingInformation" Relationship="Self.FK_dbo_BillingInformations_dbo_Customer_ID" FromRole="Customer" ToRole="BillingInformations" />
+    <NavigationProperty Name="User" Relationship="Self.FK_dbo_Customer_dbo_Users_ID" FromRole="Customer" ToRole="Users" />
+    <NavigationProperty Name="CustomerProductConfiguration" Relationship="Self.FK_dbo_CustomerProductConfigurations_dbo_Customer_ID" FromRole="Customer" ToRole="CustomerProductConfigurations" />
+    <NavigationProperty Name="CustomerEnquiries" Relationship="Self.CustomerEnquiryCustomers" FromRole="Customer" ToRole="CustomerEnquiries" />
+  </EntityType>
+  <EntityType Name="CustomerEnquiry">
+    <Key>
+      <PropertyRef Name="TrackingNumber" />
+    </Key>
+    <Property Name="TrackingNumber" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EnquiryNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EnquiryDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Order" Relationship="Self.FK_dbo_Order_dbo_CustomerEnquiries_TrackingNumber" FromRole="CustomerEnquiries" ToRole="Order" />
+    <NavigationProperty Name="TechnicalSupportEnquiry" Relationship="Self.FK_dbo_TechnicalSupportEnquiry_dbo_CustomerEnquiries_TrackingNumber" FromRole="CustomerEnquiries" ToRole="TechnicalSupportEnquiry" />
+    <NavigationProperty Name="Customers" Relationship="Self.CustomerEnquiryCustomers" FromRole="CustomerEnquiries" ToRole="Customer" />
+  </EntityType>
+  <EntityType Name="CustomerManagementEmployee">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK_dbo_CustomerManagementEmployee_dbo_Employee_ID" FromRole="CustomerManagementEmployee" ToRole="Employee" />
+  </EntityType>
+  <EntityType Name="CustomerProductConfiguration">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ConfigurationNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK_dbo_CustomerProductConfigurations_dbo_Customer_ID" FromRole="CustomerProductConfigurations" ToRole="Customer" />
+    <NavigationProperty Name="Products" Relationship="Self.FK_dbo_Products_dbo_CustomerProductConfigurations_ID" FromRole="CustomerProductConfigurations" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="CustomerManagementEmployee" Relationship="Self.FK_dbo_CustomerManagementEmployee_dbo_Employee_ID" FromRole="Employee" ToRole="CustomerManagementEmployee" />
+    <NavigationProperty Name="User" Relationship="Self.FK_dbo_Employee_dbo_Users_ID" FromRole="Employee" ToRole="Users" />
+    <NavigationProperty Name="ProductManagementEmployee" Relationship="Self.FK_dbo_ProductManagementEmployee_dbo_Employee_ID" FromRole="Employee" ToRole="ProductManagementEmployee" />
+    <NavigationProperty Name="TechnicalSupportEmployee" Relationship="Self.FK_dbo_TechnicalSupportEmployee_dbo_Employee_ID" FromRole="Employee" ToRole="TechnicalSupportEmployee" />
+  </EntityType>
+  <EntityType Name="LoginDetail">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AuthenticationLevel" Type="Int32" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Self.FK_dbo_LoginDetails_dbo_Users_UserID" FromRole="LoginDetails" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="TrackingNumber" />
+    </Key>
+    <Property Name="TrackingNumber" Type="Int32" Nullable="false" />
+    <Property Name="TotalPrice" Type="Double" Nullable="false" />
+    <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="BillingInvoice" Relationship="Self.FK_dbo_BillingInvoices_dbo_Order_OrderID" FromRole="Order" ToRole="BillingInvoices" />
+    <NavigationProperty Name="CustomerEnquiry" Relationship="Self.FK_dbo_Order_dbo_CustomerEnquiries_TrackingNumber" FromRole="Order" ToRole="CustomerEnquiries" />
+    <NavigationProperty Name="Products" Relationship="Self.FK_dbo_Products_dbo_Order_OrderID" FromRole="Order" ToRole="Products" />
+    <NavigationProperty Name="TechnicalTasks" Relationship="Self.FK_dbo_TechnicalTasks_dbo_Order_OrderID" FromRole="Order" ToRole="TechnicalTasks" />
+  </EntityType>
+  <EntityType Name="ProductInstallationHistory">
+    <Key>
+      <PropertyRef Name="SerialNumber" />
+    </Key>
+    <Property Name="SerialNumber" Type="Int32" Nullable="false" />
+    <Property Name="InstallationDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="InstallationNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Installed" Type="Boolean" Nullable="false" />
+    <Property Name="InstallationEmployee_ID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_dbo_ProductInstallationHistories_dbo_Products_SerialNumber" FromRole="ProductInstallationHistories" ToRole="Products" />
+    <NavigationProperty Name="TechnicalSupportEmployee" Relationship="Self.FK_dbo_ProductInstallationHistories_dbo_TechnicalSupportEmployee_InstallationEmployee_ID" FromRole="ProductInstallationHistories" ToRole="TechnicalSupportEmployee" />
+  </EntityType>
+  <EntityType Name="ProductManagementEmployee">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK_dbo_ProductManagementEmployee_dbo_Employee_ID" FromRole="ProductManagementEmployee" ToRole="Employee" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="SerialNumber" />
+    </Key>
+    <Property Name="SerialNumber" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StockOutDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StockInDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ProductID" Type="Int32" Nullable="false" />
+    <Property Name="TaskID" Type="Int32" Nullable="false" />
+    <Property Name="OrderID" Type="Int32" Nullable="false" />
+    <Property Name="ID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CustomerProductConfiguration" Relationship="Self.FK_dbo_Products_dbo_CustomerProductConfigurations_ID" FromRole="Products" ToRole="CustomerProductConfigurations" />
+    <NavigationProperty Name="Order" Relationship="Self.FK_dbo_Products_dbo_Order_OrderID" FromRole="Products" ToRole="Order" />
+    <NavigationProperty Name="ProductInstallationHistory" Relationship="Self.FK_dbo_ProductInstallationHistories_dbo_Products_SerialNumber" FromRole="Products" ToRole="ProductInstallationHistories" />
+    <NavigationProperty Name="ProductType" Relationship="Self.FK_dbo_Products_dbo_ProductTypes_ProductID" FromRole="Products" ToRole="ProductTypes" />
+    <NavigationProperty Name="TechnicalTask" Relationship="Self.FK_dbo_Products_dbo_TechnicalTasks_TaskID" FromRole="Products" ToRole="TechnicalTasks" />
+  </EntityType>
+  <EntityType Name="ProductType">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="WarrantyDuration" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="ProductName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="QuantityInStock" Type="Int32" Nullable="false" />
+    <Property Name="ProductImage" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="ProductDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="WarehouseID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Products" Relationship="Self.FK_dbo_Products_dbo_ProductTypes_ProductID" FromRole="ProductTypes" ToRole="Products" />
+    <NavigationProperty Name="Stock" Relationship="Self.FK_dbo_ProductTypes_dbo_Stocks_WarehouseID" FromRole="ProductTypes" ToRole="Stocks" />
+  </EntityType>
+  <EntityType Name="Schedule">
+    <Key>
+      <PropertyRef Name="ScheduleID" />
+    </Key>
+    <Property Name="ScheduleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ScheduleDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TechnicalSupportEmployee" Relationship="Self.FK_dbo_Schedules_dbo_TechnicalSupportEmployee_ID" FromRole="Schedules" ToRole="TechnicalSupportEmployee" />
+    <NavigationProperty Name="TechnicalTasks" Relationship="Self.FK_dbo_TechnicalTasks_dbo_Schedules_ScheduleID" FromRole="Schedules" ToRole="TechnicalTasks" />
+  </EntityType>
+  <EntityType Name="Stock">
+    <Key>
+      <PropertyRef Name="WarehouseID" />
+    </Key>
+    <Property Name="WarehouseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="ProductTypes" Relationship="Self.FK_dbo_ProductTypes_dbo_Stocks_WarehouseID" FromRole="Stocks" ToRole="ProductTypes" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TechnicalSupportEmployee">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK_dbo_TechnicalSupportEmployee_dbo_Employee_ID" FromRole="TechnicalSupportEmployee" ToRole="Employee" />
+    <NavigationProperty Name="ProductInstallationHistories" Relationship="Self.FK_dbo_ProductInstallationHistories_dbo_TechnicalSupportEmployee_InstallationEmployee_ID" FromRole="TechnicalSupportEmployee" ToRole="ProductInstallationHistories" />
+    <NavigationProperty Name="Schedules" Relationship="Self.FK_dbo_Schedules_dbo_TechnicalSupportEmployee_ID" FromRole="TechnicalSupportEmployee" ToRole="Schedules" />
+  </EntityType>
+  <EntityType Name="TechnicalSupportEnquiry">
+    <Key>
+      <PropertyRef Name="TrackingNumber" />
+    </Key>
+    <Property Name="TrackingNumber" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CustomerEnquiry" Relationship="Self.FK_dbo_TechnicalSupportEnquiry_dbo_CustomerEnquiries_TrackingNumber" FromRole="TechnicalSupportEnquiry" ToRole="CustomerEnquiries" />
+    <NavigationProperty Name="TechnicalTasks" Relationship="Self.FK_dbo_TechnicalTasks_dbo_TechnicalSupportEnquiry_TrackingNumber" FromRole="TechnicalSupportEnquiry" ToRole="TechnicalTasks" />
+  </EntityType>
+  <EntityType Name="TechnicalTask">
+    <Key>
+      <PropertyRef Name="TaskID" />
+    </Key>
+    <Property Name="TaskID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Completed" Type="Boolean" Nullable="false" />
+    <Property Name="EstimatedTaskTime" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="TaskDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TaskTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="OrderID" Type="Int32" Nullable="false" />
+    <Property Name="TrackingNumber" Type="Int32" Nullable="false" />
+    <Property Name="ScheduleID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Order" Relationship="Self.FK_dbo_TechnicalTasks_dbo_Order_OrderID" FromRole="TechnicalTasks" ToRole="Order" />
+    <NavigationProperty Name="Products" Relationship="Self.FK_dbo_Products_dbo_TechnicalTasks_TaskID" FromRole="TechnicalTasks" ToRole="Products" />
+    <NavigationProperty Name="Schedule" Relationship="Self.FK_dbo_TechnicalTasks_dbo_Schedules_ScheduleID" FromRole="TechnicalTasks" ToRole="Schedules" />
+    <NavigationProperty Name="TechnicalSupportEnquiry" Relationship="Self.FK_dbo_TechnicalTasks_dbo_TechnicalSupportEnquiry_TrackingNumber" FromRole="TechnicalTasks" ToRole="TechnicalSupportEnquiry" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Gender" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Surname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FullName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Address" Relationship="Self.FK_dbo_Addresses_dbo_Users_ID" FromRole="Users" ToRole="Addresses" />
+    <NavigationProperty Name="ContactDetail" Relationship="Self.FK_dbo_ContactDetails_dbo_Users_ID" FromRole="Users" ToRole="ContactDetails" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK_dbo_Customer_dbo_Users_ID" FromRole="Users" ToRole="Customer" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK_dbo_Employee_dbo_Users_ID" FromRole="Users" ToRole="Employee" />
+    <NavigationProperty Name="LoginDetail" Relationship="Self.FK_dbo_LoginDetails_dbo_Users_UserID" FromRole="Users" ToRole="LoginDetails" />
+  </EntityType>
+  <Association Name="FK_dbo_Addresses_dbo_Users_ID">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="Addresses" Type="Self.Address" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Addresses">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_BillingInformations_dbo_Customer_ID">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="BillingInformations" Type="Self.BillingInformation" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BillingInformations">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_BillingInvoices_dbo_BillingInformations_BillingInformation_ID">
+    <End Role="BillingInformations" Type="Self.BillingInformation" Multiplicity="0..1" />
+    <End Role="BillingInvoices" Type="Self.BillingInvoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BillingInformations">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BillingInvoices">
+        <PropertyRef Name="BillingInformation_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_BillingInvoices_dbo_Order_OrderID">
+    <End Role="Order" Type="Self.Order" Multiplicity="1" />
+    <End Role="BillingInvoices" Type="Self.BillingInvoice" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="TrackingNumber" />
+      </Principal>
+      <Dependent Role="BillingInvoices">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_ContactDetails_dbo_Users_ID">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="ContactDetails" Type="Self.ContactDetail" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ContactDetails">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Customer_dbo_Users_ID">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_CustomerProductConfigurations_dbo_Customer_ID">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="CustomerProductConfigurations" Type="Self.CustomerProductConfiguration" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CustomerProductConfigurations">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Order_dbo_CustomerEnquiries_TrackingNumber">
+    <End Role="CustomerEnquiries" Type="Self.CustomerEnquiry" Multiplicity="1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="CustomerEnquiries">
+        <PropertyRef Name="TrackingNumber" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="TrackingNumber" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_TechnicalSupportEnquiry_dbo_CustomerEnquiries_TrackingNumber">
+    <End Role="CustomerEnquiries" Type="Self.CustomerEnquiry" Multiplicity="1" />
+    <End Role="TechnicalSupportEnquiry" Type="Self.TechnicalSupportEnquiry" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="CustomerEnquiries">
+        <PropertyRef Name="TrackingNumber" />
+      </Principal>
+      <Dependent Role="TechnicalSupportEnquiry">
+        <PropertyRef Name="TrackingNumber" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_CustomerManagementEmployee_dbo_Employee_ID">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="CustomerManagementEmployee" Type="Self.CustomerManagementEmployee" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CustomerManagementEmployee">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Products_dbo_CustomerProductConfigurations_ID">
+    <End Role="CustomerProductConfigurations" Type="Self.CustomerProductConfiguration" Multiplicity="0..1" />
+    <End Role="Products" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CustomerProductConfigurations">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Employee_dbo_Users_ID">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_ProductManagementEmployee_dbo_Employee_ID">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="ProductManagementEmployee" Type="Self.ProductManagementEmployee" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ProductManagementEmployee">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_TechnicalSupportEmployee_dbo_Employee_ID">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="TechnicalSupportEmployee" Type="Self.TechnicalSupportEmployee" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TechnicalSupportEmployee">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_LoginDetails_dbo_Users_UserID">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="LoginDetails" Type="Self.LoginDetail" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="LoginDetails">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Products_dbo_Order_OrderID">
+    <End Role="Order" Type="Self.Order" Multiplicity="1" />
+    <End Role="Products" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="TrackingNumber" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_TechnicalTasks_dbo_Order_OrderID">
+    <End Role="Order" Type="Self.Order" Multiplicity="1" />
+    <End Role="TechnicalTasks" Type="Self.TechnicalTask" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="TrackingNumber" />
+      </Principal>
+      <Dependent Role="TechnicalTasks">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_ProductInstallationHistories_dbo_Products_SerialNumber">
+    <End Role="Products" Type="Self.Product" Multiplicity="1" />
+    <End Role="ProductInstallationHistories" Type="Self.ProductInstallationHistory" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="SerialNumber" />
+      </Principal>
+      <Dependent Role="ProductInstallationHistories">
+        <PropertyRef Name="SerialNumber" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_ProductInstallationHistories_dbo_TechnicalSupportEmployee_InstallationEmployee_ID">
+    <End Role="TechnicalSupportEmployee" Type="Self.TechnicalSupportEmployee" Multiplicity="0..1" />
+    <End Role="ProductInstallationHistories" Type="Self.ProductInstallationHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TechnicalSupportEmployee">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ProductInstallationHistories">
+        <PropertyRef Name="InstallationEmployee_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Products_dbo_ProductTypes_ProductID">
+    <End Role="ProductTypes" Type="Self.ProductType" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Products" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductTypes">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Products_dbo_TechnicalTasks_TaskID">
+    <End Role="TechnicalTasks" Type="Self.TechnicalTask" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Products" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TechnicalTasks">
+        <PropertyRef Name="TaskID" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="TaskID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_ProductTypes_dbo_Stocks_WarehouseID">
+    <End Role="Stocks" Type="Self.Stock" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ProductTypes" Type="Self.ProductType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stocks">
+        <PropertyRef Name="WarehouseID" />
+      </Principal>
+      <Dependent Role="ProductTypes">
+        <PropertyRef Name="WarehouseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Schedules_dbo_TechnicalSupportEmployee_ID">
+    <End Role="TechnicalSupportEmployee" Type="Self.TechnicalSupportEmployee" Multiplicity="0..1" />
+    <End Role="Schedules" Type="Self.Schedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TechnicalSupportEmployee">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Schedules">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_TechnicalTasks_dbo_Schedules_ScheduleID">
+    <End Role="Schedules" Type="Self.Schedule" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TechnicalTasks" Type="Self.TechnicalTask" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Schedules">
+        <PropertyRef Name="ScheduleID" />
+      </Principal>
+      <Dependent Role="TechnicalTasks">
+        <PropertyRef Name="ScheduleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_TechnicalTasks_dbo_TechnicalSupportEnquiry_TrackingNumber">
+    <End Role="TechnicalSupportEnquiry" Type="Self.TechnicalSupportEnquiry" Multiplicity="1" />
+    <End Role="TechnicalTasks" Type="Self.TechnicalTask" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TechnicalSupportEnquiry">
+        <PropertyRef Name="TrackingNumber" />
+      </Principal>
+      <Dependent Role="TechnicalTasks">
+        <PropertyRef Name="TrackingNumber" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CustomerEnquiryCustomers">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+    <End Role="CustomerEnquiries" Type="Self.CustomerEnquiry" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="SHSDatabaseConnection" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+    <EntitySet Name="Addresses" EntityType="Self.Address" />
+    <EntitySet Name="BillingInformations" EntityType="Self.BillingInformation" />
+    <EntitySet Name="BillingInvoices" EntityType="Self.BillingInvoice" />
+    <EntitySet Name="ContactDetails" EntityType="Self.ContactDetail" />
+    <EntitySet Name="Customers" EntityType="Self.Customer" />
+    <EntitySet Name="CustomerEnquiries" EntityType="Self.CustomerEnquiry" />
+    <EntitySet Name="CustomerManagementEmployees" EntityType="Self.CustomerManagementEmployee" />
+    <EntitySet Name="CustomerProductConfigurations" EntityType="Self.CustomerProductConfiguration" />
+    <EntitySet Name="Employees" EntityType="Self.Employee" />
+    <EntitySet Name="LoginDetails" EntityType="Self.LoginDetail" />
+    <EntitySet Name="Orders" EntityType="Self.Order" />
+    <EntitySet Name="ProductInstallationHistories" EntityType="Self.ProductInstallationHistory" />
+    <EntitySet Name="ProductManagementEmployees" EntityType="Self.ProductManagementEmployee" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="ProductTypes" EntityType="Self.ProductType" />
+    <EntitySet Name="Schedules" EntityType="Self.Schedule" />
+    <EntitySet Name="Stocks" EntityType="Self.Stock" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="TechnicalSupportEmployees" EntityType="Self.TechnicalSupportEmployee" />
+    <EntitySet Name="TechnicalSupportEnquiries" EntityType="Self.TechnicalSupportEnquiry" />
+    <EntitySet Name="TechnicalTasks" EntityType="Self.TechnicalTask" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_dbo_Addresses_dbo_Users_ID" Association="Self.FK_dbo_Addresses_dbo_Users_ID">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Addresses" EntitySet="Addresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_BillingInformations_dbo_Customer_ID" Association="Self.FK_dbo_BillingInformations_dbo_Customer_ID">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="BillingInformations" EntitySet="BillingInformations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_BillingInvoices_dbo_BillingInformations_BillingInformation_ID" Association="Self.FK_dbo_BillingInvoices_dbo_BillingInformations_BillingInformation_ID">
+      <End Role="BillingInformations" EntitySet="BillingInformations" />
+      <End Role="BillingInvoices" EntitySet="BillingInvoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_BillingInvoices_dbo_Order_OrderID" Association="Self.FK_dbo_BillingInvoices_dbo_Order_OrderID">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="BillingInvoices" EntitySet="BillingInvoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_ContactDetails_dbo_Users_ID" Association="Self.FK_dbo_ContactDetails_dbo_Users_ID">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="ContactDetails" EntitySet="ContactDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Customer_dbo_Users_ID" Association="Self.FK_dbo_Customer_dbo_Users_ID">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Customer" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_CustomerProductConfigurations_dbo_Customer_ID" Association="Self.FK_dbo_CustomerProductConfigurations_dbo_Customer_ID">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="CustomerProductConfigurations" EntitySet="CustomerProductConfigurations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Order_dbo_CustomerEnquiries_TrackingNumber" Association="Self.FK_dbo_Order_dbo_CustomerEnquiries_TrackingNumber">
+      <End Role="CustomerEnquiries" EntitySet="CustomerEnquiries" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_TechnicalSupportEnquiry_dbo_CustomerEnquiries_TrackingNumber" Association="Self.FK_dbo_TechnicalSupportEnquiry_dbo_CustomerEnquiries_TrackingNumber">
+      <End Role="CustomerEnquiries" EntitySet="CustomerEnquiries" />
+      <End Role="TechnicalSupportEnquiry" EntitySet="TechnicalSupportEnquiries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_CustomerManagementEmployee_dbo_Employee_ID" Association="Self.FK_dbo_CustomerManagementEmployee_dbo_Employee_ID">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="CustomerManagementEmployee" EntitySet="CustomerManagementEmployees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Products_dbo_CustomerProductConfigurations_ID" Association="Self.FK_dbo_Products_dbo_CustomerProductConfigurations_ID">
+      <End Role="CustomerProductConfigurations" EntitySet="CustomerProductConfigurations" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Employee_dbo_Users_ID" Association="Self.FK_dbo_Employee_dbo_Users_ID">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Employee" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_ProductManagementEmployee_dbo_Employee_ID" Association="Self.FK_dbo_ProductManagementEmployee_dbo_Employee_ID">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="ProductManagementEmployee" EntitySet="ProductManagementEmployees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_TechnicalSupportEmployee_dbo_Employee_ID" Association="Self.FK_dbo_TechnicalSupportEmployee_dbo_Employee_ID">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="TechnicalSupportEmployee" EntitySet="TechnicalSupportEmployees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_LoginDetails_dbo_Users_UserID" Association="Self.FK_dbo_LoginDetails_dbo_Users_UserID">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="LoginDetails" EntitySet="LoginDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Products_dbo_Order_OrderID" Association="Self.FK_dbo_Products_dbo_Order_OrderID">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_TechnicalTasks_dbo_Order_OrderID" Association="Self.FK_dbo_TechnicalTasks_dbo_Order_OrderID">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="TechnicalTasks" EntitySet="TechnicalTasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_ProductInstallationHistories_dbo_Products_SerialNumber" Association="Self.FK_dbo_ProductInstallationHistories_dbo_Products_SerialNumber">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="ProductInstallationHistories" EntitySet="ProductInstallationHistories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_ProductInstallationHistories_dbo_TechnicalSupportEmployee_InstallationEmployee_ID" Association="Self.FK_dbo_ProductInstallationHistories_dbo_TechnicalSupportEmployee_InstallationEmployee_ID">
+      <End Role="TechnicalSupportEmployee" EntitySet="TechnicalSupportEmployees" />
+      <End Role="ProductInstallationHistories" EntitySet="ProductInstallationHistories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Products_dbo_ProductTypes_ProductID" Association="Self.FK_dbo_Products_dbo_ProductTypes_ProductID">
+      <End Role="ProductTypes" EntitySet="ProductTypes" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Products_dbo_TechnicalTasks_TaskID" Association="Self.FK_dbo_Products_dbo_TechnicalTasks_TaskID">
+      <End Role="TechnicalTasks" EntitySet="TechnicalTasks" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_ProductTypes_dbo_Stocks_WarehouseID" Association="Self.FK_dbo_ProductTypes_dbo_Stocks_WarehouseID">
+      <End Role="Stocks" EntitySet="Stocks" />
+      <End Role="ProductTypes" EntitySet="ProductTypes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Schedules_dbo_TechnicalSupportEmployee_ID" Association="Self.FK_dbo_Schedules_dbo_TechnicalSupportEmployee_ID">
+      <End Role="TechnicalSupportEmployee" EntitySet="TechnicalSupportEmployees" />
+      <End Role="Schedules" EntitySet="Schedules" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_TechnicalTasks_dbo_Schedules_ScheduleID" Association="Self.FK_dbo_TechnicalTasks_dbo_Schedules_ScheduleID">
+      <End Role="Schedules" EntitySet="Schedules" />
+      <End Role="TechnicalTasks" EntitySet="TechnicalTasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_TechnicalTasks_dbo_TechnicalSupportEnquiry_TrackingNumber" Association="Self.FK_dbo_TechnicalTasks_dbo_TechnicalSupportEnquiry_TrackingNumber">
+      <End Role="TechnicalSupportEnquiry" EntitySet="TechnicalSupportEnquiries" />
+      <End Role="TechnicalTasks" EntitySet="TechnicalTasks" />
+    </AssociationSet>
+    <AssociationSet Name="CustomerEnquiryCustomers" Association="Self.CustomerEnquiryCustomers">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="CustomerEnquiries" EntitySet="CustomerEnquiries" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
